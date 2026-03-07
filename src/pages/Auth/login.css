@@ -1,0 +1,7 @@
+.eye {
+  cursor: pointer;
+  transition: 'all 0.3s ease-in-out';
+}
+.eye:hover {
+  opacity: 0.7;
+}
