@@ -7,8 +7,12 @@ import { TbLogout } from 'react-icons/tb';
 const NAV = [
   { to: '/', label: 'Dashboard', icon: '⊞' },
   { to: '/transfers', label: 'Transactions', icon: '⇄' },
-  { to: '/merchants', label: 'Merchants', icon: '⊙' },
   { to: '/liquidity', label: 'Liquidity', icon: '⬡' },
+  {
+    to: '/position-change-history',
+    label: 'Positions History',
+    icon: '⬡',
+  },
   { to: '/users', label: 'Users', icon: '◎' },
   { to: '/profile', label: 'Profile', icon: '⊟' },
   { to: '/activity-logs', label: 'Activity Logs', icon: '▤' },

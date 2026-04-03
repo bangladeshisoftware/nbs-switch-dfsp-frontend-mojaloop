@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
 import { MdLogin } from 'react-icons/md';
 import './login.css';
@@ -10,7 +10,7 @@ import { AiFillBank } from 'react-icons/ai';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [step, setStep] = useState('login'); // login | otp
+  const [step, setStep] = useState('login'); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [form, setForm] = useState({ username: '', password: '', otp: '' });
@@ -71,7 +71,7 @@ export default function Login() {
     >
       <div style={{ width: '100%', maxWidth: 380 }}>
         {/* Logo */}
-        <div style={{ textAlign: 'center',}}>
+        <div style={{ textAlign: 'center' }}>
           <div className='sidebar-logo'>
             <AiFillBank size={45} color='rgb(154 221 0)' />
             <div>

@@ -213,7 +213,7 @@ export default function Liquidity() {
       </div>
 
       {/* Position History */}
-      <div className='card'>
+      {/* <div className='card'>
         <div className='card-header'>
           <span className='card-title'>
             <LuHistory /> Position Change History
@@ -288,7 +288,7 @@ export default function Liquidity() {
             </table>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

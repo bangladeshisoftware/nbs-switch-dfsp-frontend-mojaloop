@@ -9,6 +9,8 @@ import Liquidity from './pages/Liquidity/Liquidity';
 import Users from './pages/Users/Users';
 import Profile from './pages/Profile/Profile';
 import ActivityLogs from './pages/ActivityLogs/ActivityLogs';
+import PositionChangeHistory from './pages/PositionHistory/PositionChangeHistory';
+import DirectLogin from './pages/Auth/DirectLogIn';
 
 function Protected({ children }) {
   const token = localStorage.getItem('dfsp_token');
@@ -20,6 +22,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<Login />} />
+        <Route path='/login/:ref' element={<DirectLogin />} />
         <Route
           path='/*'
           element={
@@ -30,11 +33,12 @@ export default function App() {
                   <Route path='/transfers' element={<Transfers />} />
                   <Route path='/merchants' element={<Merchants />} />
                   <Route path='/liquidity' element={<Liquidity />} />
-                  <Route path='/users' element={<Users />} />
                   <Route
-                    path='/activity-logs'
-                    element={ <ActivityLogs />}
+                    path='/position-change-history'
+                    element={<PositionChangeHistory />}
                   />
+                  <Route path='/users' element={<Users />} />
+                  <Route path='/activity-logs' element={<ActivityLogs />} />
                   <Route path='/profile' element={<Profile />} />
                   <Route path='*' element={<Navigate to='/' />} />
                 </Routes>
