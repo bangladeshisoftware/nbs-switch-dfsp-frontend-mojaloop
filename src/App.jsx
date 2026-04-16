@@ -9,8 +9,11 @@ import Liquidity from './pages/Liquidity/Liquidity';
 import Users from './pages/Users/Users';
 import Profile from './pages/Profile/Profile';
 import ActivityLogs from './pages/ActivityLogs/ActivityLogs';
-import PositionChangeHistory from './pages/PositionHistory/PositionChangeHistory';
 import DirectLogin from './pages/Auth/DirectLogIn';
+import SettlementHistory from './pages/Liquidity/SettlementHistory';
+import SettlementFinalizeRecords from './pages/Liquidity/SettlementFinalizeRecords';
+import DepositsHistory from './pages/Liquidity/DepositsHistory';
+import PositionsChangeHistory from './pages/PositionHistory/PositionChangeHistory';
 
 function Protected({ children }) {
   const token = localStorage.getItem('dfsp_token');
@@ -35,7 +38,20 @@ export default function App() {
                   <Route path='/liquidity' element={<Liquidity />} />
                   <Route
                     path='/position-change-history'
-                    element={<PositionChangeHistory />}
+                    element={<PositionsChangeHistory />}
+                  />
+                  <Route path='/users' element={<Users />} />
+                  <Route
+                    path='/settlement-records'
+                    element={<SettlementHistory />}
+                  />
+                  <Route
+                    path='/finalize-records'
+                    element={<SettlementFinalizeRecords />}
+                  />
+                  <Route
+                    path='/deposits-history'
+                    element={<DepositsHistory />}
                   />
                   <Route path='/users' element={<Users />} />
                   <Route path='/activity-logs' element={<ActivityLogs />} />

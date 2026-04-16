@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import api from '../../services/api';
 
-export default function PositionsChangeHistory() {
+export default function DepositsHistory() {
   const [records, setRecords] = useState([]);
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ export default function PositionsChangeHistory() {
         Object.entries(filters).forEach(([k, v]) => {
           if (v) params.append(k, v);
         });
-        const res = await api.get(`/liquidity/positions/history?${params}`);
+        const res = await api.get(`/liquidity/deposits-records?${params}`);
         setRecords(res.data.data || []);
         setSummary(res.data.summary || null);
         setTotal(res.data.pagination?.total || 0);
@@ -43,8 +43,7 @@ export default function PositionsChangeHistory() {
 
   const totalPages = Math.ceil(total / LIMIT);
   const f = (k) => (e) => setFilters((p) => ({ ...p, [k]: e.target.value }));
-  const fmt = (v) =>
-    parseFloat(v || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
+
   return (
     <div>
       {/* Header */}
@@ -58,7 +57,7 @@ export default function PositionsChangeHistory() {
       >
         <div>
           <h2 style={{ margin: 0, fontWeight: 700, fontSize: 18 }}>
-            Positions History
+            Deposits History
           </h2>
           <p
             style={{
@@ -67,7 +66,7 @@ export default function PositionsChangeHistory() {
               color: 'var(--text-muted)',
             }}
           >
-            Position change history of each the transaction cycle
+            Position before/after reset per settlement cycle
           </p>
         </div>
         <button
@@ -90,7 +89,7 @@ export default function PositionsChangeHistory() {
         >
           {[
             {
-              label: 'Total Records',
+              label: 'Total Deposits Records',
               value: summary.total_windows,
               color: 'var(--primary)',
             },
@@ -234,66 +233,126 @@ export default function PositionsChangeHistory() {
         </div>
 
         <div style={{ overflowX: 'auto' }}>
-          <table>
+          <table
+            style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}
+          >
             <thead>
-              <tr>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Before</th>
-                <th>After</th>
-                <th>Transfer ID</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {records &&
-                records?.map((h) => (
-                  <tr key={h.id}>
-                    <td>
-                      <span
-                        className={`badge ${h.change_type === 'DEPOSIT' ? 'badge-active' : h.change_type === 'RESERVE' ? 'badge-reserved' : 'badge-committed'}`}
-                      >
-                        {h.change_type}
-                      </span>
-                    </td>
-                    <td
-                      className='td-mono'
+              <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                {['#', 'Date', 'Currency', 'Amount', 'Note/ Reason'].map(
+                  (h) => (
+                    <th
+                      key={h}
                       style={{
-                        color: h.amount > 0 ? 'var(--green)' : 'var(--red)',
-                        textAlign: 'right',
-                      }}
-                    >
-                      {h.amount > 0 ? '+' : ''}
-                      {parseFloat(h.amount || 0).toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                      })}
-                    </td>
-                    <td
-                      className='td-mono'
-                      style={{ fontSize: 11, color: 'var(--text-muted)' }}
-                    >
-                      {fmt(h.position_before)}
-                    </td>
-                    <td className='td-mono' style={{ fontSize: 11 }}>
-                      {fmt(h.position_after)}
-                    </td>
-                    <td
-                      className='td-mono'
-                      style={{
-                        fontSize: 10,
-                        maxWidth: 160,
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
+                        padding: '8px 14px',
+                        textAlign: 'left',
+                        fontSize: 9,
+                        fontWeight: 700,
+                        letterSpacing: 1,
+                        color: 'var(--text-muted)',
+                        textTransform: 'uppercase',
                         whiteSpace: 'nowrap',
                       }}
                     >
-                      {h.transfer_id || '—'}
-                    </td>
-                    <td style={{ fontSize: 10, color: 'var(--text-muted)' }}>
-                      {new Date(h.created_at).toLocaleString()}
-                    </td>
-                  </tr>
-                ))}
+                      {h}
+                    </th>
+                  ),
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td
+                    colSpan={8}
+                    style={{
+                      textAlign: 'center',
+                      padding: 40,
+                      color: 'var(--text-muted)',
+                    }}
+                  >
+                    Loading...
+                  </td>
+                </tr>
+              ) : records.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={8}
+                    style={{
+                      textAlign: 'center',
+                      padding: 40,
+                      color: 'var(--text-muted)',
+                    }}
+                  >
+                    No settlement history found
+                  </td>
+                </tr>
+              ) : (
+                records.map((r, i) => {
+                  const before = parseFloat(r.before_position || 0);
+                  const net = parseFloat(r.net_amount || 0);
+                  return (
+                    <tr
+                      key={r.id || i}
+                      style={{ borderBottom: '1px solid var(--border)' }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.background = 'var(--hover)')
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.background = '')
+                      }
+                    >
+                      <td
+                        style={{
+                          padding: '8px 14px',
+                          color: 'var(--text-muted)',
+                          fontSize: 10,
+                        }}
+                      >
+                        {(page - 1) * LIMIT + i + 1}
+                      </td>
+                      <td
+                        style={{
+                          padding: '8px 14px',
+                          color: 'var(--text-muted)',
+                          fontSize: 11,
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {new Date(r.created_at).toLocaleString()}
+                      </td>
+                      <td
+                        style={{
+                          padding: '8px 14px',
+                          fontFamily: 'monospace',
+                          fontWeight: 700,
+                          color: 'var(--primary)',
+                        }}
+                      >
+                        {r?.currency}
+                      </td>
+                      <td
+                        style={{
+                          padding: '8px 14px',
+                          fontFamily: 'monospace',
+                          fontSize: 11,
+                          color: 'var(--text-muted)',
+                        }}
+                      >
+                        {r?.amount || '—'}
+                      </td>
+                      <td
+                        style={{
+                          padding: '8px 14px',
+                          fontFamily: 'monospace',
+                          fontSize: 11,
+                        }}
+                      >
+                        <p> {r?.reason}</p>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

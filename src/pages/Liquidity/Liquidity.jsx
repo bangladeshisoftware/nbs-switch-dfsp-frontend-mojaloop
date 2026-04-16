@@ -106,7 +106,7 @@ export default function Liquidity() {
               },
               {
                 label: 'Available',
-                value: fmt(available),
+                value: fmt(pos?.available),
                 color: 'var(--green)',
                 icon: '✓',
               },
