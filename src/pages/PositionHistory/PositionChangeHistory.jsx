@@ -74,7 +74,7 @@ export default function PositionsChangeHistory() {
           className='btn btn-sm btn-secondary'
           onClick={() => fetchRecords(page)}
         >
-          ↺ Refresh
+           Refresh
         </button>
       </div>
 

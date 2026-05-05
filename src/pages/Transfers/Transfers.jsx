@@ -126,7 +126,7 @@ export default function Transfers() {
             disabled={loading}
           >
             {loading ? (
-              '⏳'
+              'Loading...'
             ) : (
               <>
                 {' '}

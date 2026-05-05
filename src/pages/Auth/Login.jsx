@@ -211,7 +211,7 @@ export default function Login() {
                   }}
                   disabled={loading}
                 >
-                  {loading ? '⏳ Verifying...' : '✓ Verify OTP'}
+                  {loading ? 'Verifying...' : 'Verify OTP'}
                 </button>
                 <button
                   type='button'
@@ -226,7 +226,7 @@ export default function Login() {
                     setError('');
                   }}
                 >
-                  ← Back
+                  Back
                 </button>
               </form>
             )}
@@ -241,7 +241,7 @@ export default function Login() {
             color: '#333',
           }}
         >
-          R Switch Portal · Secure DFSP Access
+          R Switch Portal - Secure DFSP Access
         </div>
       </div>
     </div>

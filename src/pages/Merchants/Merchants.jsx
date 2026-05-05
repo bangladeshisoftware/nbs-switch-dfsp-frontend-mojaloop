@@ -24,8 +24,8 @@ const BADGE = {
 };
 const ALS_BADGE = {
   registered: { color: 'var(--green)', label: '✓ ALS' },
-  failed: { color: 'var(--red)', label: '✗ ALS' },
-  pending: { color: 'var(--yellow)', label: '⏳ ALS' },
+  failed: { color: 'var(--red)', label: ' ALS' },
+  pending: { color: 'var(--yellow)', label: ' ALS' },
 };
 
 const EMPTY_FORM = {
@@ -41,7 +41,6 @@ const EMPTY_FORM = {
   category: '',
   daily_limit: '',
   monthly_limit: '',
-  // ALS Party fields
   id_type: 'MSISDN',
   id_value: '',
   first_name: '',
@@ -58,7 +57,7 @@ export default function Merchants() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({ status: 'ALL', search: '' });
-  const [modal, setModal] = useState(null); // null | 'create' | {merchant}
+  const [modal, setModal] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState('');
@@ -451,7 +450,7 @@ export default function Merchants() {
                       marginBottom: 10,
                     }}
                   >
-                    ⬡ ALS PARTY REGISTRATION
+                     ALS PARTY REGISTRATION
                   </div>
 
                   <div className='form-grid-2'>
@@ -527,10 +526,10 @@ export default function Merchants() {
                 disabled={saving}
               >
                 {saving
-                  ? '⏳ Saving...'
+                  ? 'Saving...'
                   : modal === 'create'
-                    ? '+ Register'
-                    : '✓ Update'}
+                    ? ' Register'
+                    : 'Update'}
               </button>
             </div>
           </div>

@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5174,
     proxy: {
       '/api': {
-        target: 'https://dfsp-serverz.mojaloop.xyz',
+        target: 'https://your-dfsp-serverz.com',
         // target: 'http://localhost:5000',
         changeOrigin: true,
       },

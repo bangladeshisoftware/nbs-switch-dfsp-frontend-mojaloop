@@ -40,7 +40,7 @@ export default function Users() {
     <div>
       <div className="page-header">
         <div></div>
-        {canManage && <button className="btn btn-primary" onClick={openCreate}>+ Add User</button>}
+        {canManage && <button className="btn btn-primary" onClick={openCreate}>Add User</button>}
       </div>
 
       <div className="card">
@@ -49,7 +49,7 @@ export default function Users() {
           <span style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{data.length} users</span>
         </div>
         {data.length === 0
-          ? <div className="empty-state"><div className="empty-icon">◎</div><div className="empty-title">No users found</div></div>
+          ? <div className="empty-state"><div className="empty-icon"></div><div className="empty-title">No users found</div></div>
           : (
             <div className="table-wrap">
               <table>
@@ -116,7 +116,7 @@ export default function Users() {
             </div>
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={() => setModal(null)}>Cancel</button>
-              <button className="btn btn-primary" onClick={handleSave} disabled={saving}>{saving ? '⏳' : '✓ Save'}</button>
+              <button className="btn btn-primary" onClick={handleSave} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
             </div>
           </div>
         </div>

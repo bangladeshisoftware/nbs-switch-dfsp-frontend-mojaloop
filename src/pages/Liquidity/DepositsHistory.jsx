@@ -73,7 +73,7 @@ export default function DepositsHistory() {
           className='btn btn-sm btn-secondary'
           onClick={() => fetchRecords(page)}
         >
-          ↺ Refresh
+          Refresh
         </button>
       </div>
 

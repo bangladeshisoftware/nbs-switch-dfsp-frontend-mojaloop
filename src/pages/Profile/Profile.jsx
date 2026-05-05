@@ -9,7 +9,7 @@ export default function Profile() {
     api.get('/auth/me').then(r => setData(r.data.data)).catch(console.error).finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="loading">⏳ Loading...</div>;
+  if (loading) return <div className="loading">Loading...</div>;
   if (!data)   return <div className="loading">Failed to load</div>;
 
   const Row = ({ label, value, mono }) => (
@@ -49,7 +49,7 @@ export default function Profile() {
           <div className="card-body">
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16, paddingBottom: 14, borderBottom: '1px solid var(--border)' }}>
               <div style={{ width: 48, height: 48, background: '#1a1a1a', border: '1px solid var(--border-light)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: 'var(--text-secondary)' }}>
-                ◎
+                
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: 15 }}>{data.full_name || data.username}</div>
