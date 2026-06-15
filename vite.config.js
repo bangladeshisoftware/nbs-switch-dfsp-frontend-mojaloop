@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5174,
     proxy: {
       '/api': {
-        target: 'https://your-dfsp-serverz.com',
+        target: 'https://your-dfsp-server.com',
         // target: 'http://localhost:5000',
         changeOrigin: true,
       },

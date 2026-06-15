@@ -28,7 +28,7 @@ export default function DirectLogin() {
       const res = await api.post('/auth/direct-login', {
         // username: username,
         // password: password,
-        token:ref, // from params
+        token: ref, // from params
       });
       if (res?.data?.error) {
         return setError(res?.data?.error || 'Login failed');
