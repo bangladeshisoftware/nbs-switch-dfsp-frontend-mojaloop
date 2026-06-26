@@ -1,3 +1,10 @@
+/**************************************************************************
+ * Copyright © 2026 Bangladeshi Software Ltd. All rights reserved.
+ * Distributed under the license terms specified in this repository.
+ *
+ * ORIGINAL AUTHOR: Muhammad Nasim (Developer)
+ **************************************************************************/
+
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
@@ -10,7 +17,7 @@ import { AiFillBank } from 'react-icons/ai';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [step, setStep] = useState('login'); 
+  const [step, setStep] = useState('login');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [form, setForm] = useState({ username: '', password: '', otp: '' });
