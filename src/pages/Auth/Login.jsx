@@ -248,7 +248,7 @@ export default function Login() {
             color: '#333',
           }}
         >
-          R Switch Portal - Secure DFSP Access
+          NB Switch Portal - Secure DFSP Access
         </div>
       </div>
     </div>

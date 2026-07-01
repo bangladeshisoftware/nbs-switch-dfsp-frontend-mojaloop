@@ -1,6 +1,6 @@
 # DFSP Portal - Frontend
 
-A modern React-based frontend portal for **DFSP (Digital Financial Service Provider) operators** within the R Switch ecosystem.
+A modern React-based frontend portal for **DFSP (Digital Financial Service Provider) operators** within the NB Switch ecosystem.
 
 The portal provides DFSP users with a secure and real-time interface to monitor transactions, liquidity positions, settlement activities, deposits, operational logs, and user management — all fully scoped to their own DFSP environment.
 
@@ -324,4 +324,4 @@ Backend API routes are expected under:
 
 # License
 
-Private — R Switch / Bangladeshi Software LTD. All rights reserved.
+Private — NB Switch / Bangladeshi Software LTD. All rights reserved.
